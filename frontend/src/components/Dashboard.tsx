@@ -21,7 +21,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   companies, prediction1, prediction2, summary, loading, compareMode, setCompareMode, onPredict
 }) => {
 
-  const renderPredictionPanel = (pred: PredictionResult | null, title: string) => {
+  const renderPredictionPanel = (pred: PredictionResult | null, _label?: string) => {
     if (!pred && !loading) return null;
 
     if (loading) {

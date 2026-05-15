@@ -21,7 +21,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   companies, prediction1, prediction2, summary, loading, compareMode, setCompareMode, onPredict
 }) => {
 
-  const renderPredictionPanel = (pred: PredictionResult | null, title: string) => {
+  const renderPredictionPanel = (pred: PredictionResult | null) => {
     if (!pred && !loading) return null;
 
     if (loading) {
@@ -97,11 +97,11 @@ const Dashboard: React.FC<DashboardProps> = ({
 
       {compareMode && (prediction1 || loading) ? (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-          {renderPredictionPanel(prediction1, "Company 1")}
-          {renderPredictionPanel(prediction2, "Company 2")}
+          {renderPredictionPanel(prediction1)}
+          {renderPredictionPanel(prediction2)}
         </div>
       ) : (
-        renderPredictionPanel(prediction1, "Prediction")
+        renderPredictionPanel(prediction1)
       )}
 
       {prediction1 && !loading && (

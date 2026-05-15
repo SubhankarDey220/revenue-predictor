@@ -12,14 +12,13 @@ const PredictionChart: React.FC<PredictionChartProps> = ({ data, predictedValue,
 
   const chartData = useMemo(() => {
     // We create a continuous line from historical to predicted
-    const lastHistorical = data[data.length - 1];
     
     const formattedData = data.map((item, index) => ({
       name: item.quarter,
       historical: item.revenue,
-      predicted: index === data.length - 1 ? item.revenue : null,
-      confidenceLow: null,
-      confidenceHigh: null
+      predicted: index === data.length - 1 ? item.revenue : null as number | null,
+      confidenceLow: null as number | null,
+      confidenceHigh: null as number | null
     }));
 
     // Add predicted point

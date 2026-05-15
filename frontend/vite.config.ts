@@ -8,7 +8,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: 'https://revenue-predictor-cd0h.onrender.com',
         changeOrigin: true
       }
     }

@@ -12,12 +12,12 @@ function App() {
   const [compareMode, setCompareMode] = useState<boolean>(false);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/companies')
+    fetch('https://revenue-predictor-cd0h.onrender.com/api/companies')
       .then(res => res.json())
       .then(data => setCompanies(data))
       .catch(err => console.error("Error fetching companies:", err));
 
-    fetch('http://localhost:8000/api/summary?quarter=Q1&year=2026')
+    fetch('https://revenue-predictor-cd0h.onrender.com/api/summary?quarter=Q1&year=2026')
       .then(res => res.json())
       .then(data => setSummary(data))
       .catch(err => console.error("Error fetching summary:", err));
@@ -29,12 +29,12 @@ function App() {
   ) => {
     setLoading(true);
     try {
-      const res1 = await fetch(`http://localhost:8000/api/predict?company=${encodeURIComponent(company)}&quarter=${quarter}&year=${year}`);
+      const res1 = await fetch(`https://revenue-predictor-cd0h.onrender.com/api/predict?company=${encodeURIComponent(company)}&quarter=${quarter}&year=${year}`);
       const data1 = await res1.json();
       setPrediction1(data1);
 
       if (compareMode && company2) {
-        const res2 = await fetch(`http://localhost:8000/api/predict?company=${encodeURIComponent(company2)}&quarter=${quarter}&year=${year}`);
+        const res2 = await fetch(`https://revenue-predictor-cd0h.onrender.com/api/predict?company=${encodeURIComponent(company2)}&quarter=${quarter}&year=${year}`);
         const data2 = await res2.json();
         setPrediction2(data2);
       } else {

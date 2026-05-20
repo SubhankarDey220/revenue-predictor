@@ -88,7 +88,7 @@ def predict_revenue(company_name, target_quarter, target_year):
     crude_sig = float(latest['Crude_oil_price'])  if sector in crude_sectors     else 0.0
     inf_sig   = float(latest['Inflation'])        if sector in inflation_sectors else 0.0
 
-    rev_lag1  = float(lag['Revenue_Lag1']         or 0)
+    rev_lag1  = float(lag['Target_Revenue'] if pd.notna(lag['Target_Revenue']) else lag['Revenue_Lag1'] or 0)
     prof_lag1 = float(lag['Profit_Lag1']          or 0)
     accel     = float(lag['Revenue_acceleration'] or 0)
     momentum  = float(lag['Price_momentum']       or 0)
@@ -149,13 +149,7 @@ def predict_revenue(company_name, target_quarter, target_year):
         
         # Try to find the actual revenue column, fallback to Revenue_Lag1 if not present
         rev_val = 0
-        if 'Revenue' in r:
-            rev_val = float(r['Revenue'])
-        else:
-            # We don't have exact Revenue, maybe it's in Revenue_Lag1 for the next quarter, 
-            # but using Revenue_Lag1 of the current row is the previous quarter's revenue.
-            # So just use rev_lag1 approximation if all else fails.
-            rev_val = float(r.get('Revenue_Lag1', rev_lag1))
+        rev_val = float(r['Target_Revenue']) if pd.notna(r['Target_Revenue']) else float(r.get('Revenue_Lag1', 0))
             
         historical.append({
             "quarter": q_str,

@@ -72,7 +72,7 @@ const Dashboard: React.FC<DashboardProps> = ({
           <MetricCard title="Predicted Revenue" value={`₹${pred.predicted_revenue.toLocaleString()} Cr`} type="neutral" />
           <MetricCard title="Growth vs Prev Qtr" value={`${pred.growth_percent > 0 ? '+' : ''}${pred.growth_percent}%`} type={pred.growth_percent >= 0 ? "positive" : "negative"} />
           <MetricCard title="Confidence Range" value={`₹${pred.confidence_range[0]} - ${pred.confidence_range[1]}`} type="neutral" isRange />
-          <MetricCard title="Model Accuracy" value={`±${pred.accuracy}%`} type="neutral" />
+          <MetricCard title="Prediction Confidence" value={`±${pred.accuracy}%`} type="neutral" />
         </div>
 
         <div className="mt-4">
